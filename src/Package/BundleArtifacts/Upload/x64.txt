@@ -1,7 +1,6 @@
-MainPackage=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\Upload\A Startup Project (Package)_1.0.5.0_x64.msix
-SymbolPackage=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\Upload\A Startup Project (Package)_1.0.5.0\A Startup Project (Package)_1.0.5.0_x64.appxsym
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\Upload\A Startup Project (Package)_1.0.5.0_language-ru.msix
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\Upload\A Startup Project (Package)_1.0.5.0_scale-100.msix
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\Upload\A Startup Project (Package)_1.0.5.0_scale-125.msix
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\Upload\A Startup Project (Package)_1.0.5.0_scale-150.msix
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\Upload\A Startup Project (Package)_1.0.5.0_scale-400.msix
+MainPackage=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\Package\bin\x64\Release\Upload\A Startup Project (Package)_2.10.31.0_x64.msix
+SymbolPackage=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\Package\bin\x64\Release\Upload\A Startup Project (Package)_2.10.31.0\A Startup Project (Package)_2.10.31.0_x64.appxsym
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\Package\bin\x64\Release\Upload\A Startup Project (Package)_2.10.31.0_scale-100.msix
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\Package\bin\x64\Release\Upload\A Startup Project (Package)_2.10.31.0_scale-125.msix
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\Package\bin\x64\Release\Upload\A Startup Project (Package)_2.10.31.0_scale-150.msix
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\Package\bin\x64\Release\Upload\A Startup Project (Package)_2.10.31.0_scale-400.msix

@@ -38,9 +38,9 @@ namespace AudioRecorderV4
             PackageVersion version = packageId.Version;
 
             var appFolder = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var file = System.IO.Path.Combine(appFolder, "bin", $"gimp-{version.Major}.{version.Minor}.exe");
+            var binFolder = System.IO.Path.Combine(appFolder, "bin");
 
-            Process.Start(new ProcessStartInfo() { FileName=file,  WorkingDirectory = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(file))});
+            Process.Start(new ProcessStartInfo() { CreateNoWindow=true, UseShellExecute=true, FileName= "cmd", Arguments = $"/c \"start /b gimp-{version.Major}.{version.Minor}.exe\"",  WorkingDirectory = binFolder });
         }
     }
 }
