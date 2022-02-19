@@ -7,6 +7,7 @@ namespace DownloadInstaller
         public string Temp { get; set; }
         public string InstallSetup { get; set; }
         public string DownloadSetup { get; set; }
+        public string Package { get; set; }
     }
 
     internal static class TempDir
@@ -24,6 +25,7 @@ namespace DownloadInstaller
             dirs.Temp = tempFolder;
             dirs.DownloadSetup = Path.Combine(dirs.Temp, "download-setup");
             dirs.InstallSetup = Path.Combine(dirs.Temp, "install-setup");
+            dirs.Package = Path.Combine(dirs.Temp, "../Package");
 
             if (Directory.Exists(dirs.InstallSetup))
             {

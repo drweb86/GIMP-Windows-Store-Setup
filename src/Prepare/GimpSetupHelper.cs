@@ -16,7 +16,7 @@ namespace DownloadInstaller
 
             var searchMask = "gimp-*.exe";
             var gimpExecutable = Directory.GetFiles(binFolder, searchMask)
-                .OrderByDescending(f => f.Length)
+                .OrderBy(f => f.Length)
                 .FirstOrDefault();
             
             if (gimpExecutable == null)
