@@ -9,6 +9,8 @@
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
     <UseWinUI>true</UseWinUI>
     <PackageIcon>1080x1080.png</PackageIcon>
+	  <RunPostBuildEvent>Always</RunPostBuildEvent>
+	  <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources.resw" />
@@ -19,4 +21,25 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
+
+<ItemGroup>
+		<None Include="$(SolutionDir)temp\install-setup\**\*.*">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <!--<ItemGroup>
+      <SomeAppStuff Include="$(SolutionDir)temp\install-setup\**\*.*" />
+    </ItemGroup>
+    <Copy 
+      SourceFiles="@(SomeAppStaff)" 
+      DestinationFolder="$(OutputPath)\%(RecursiveDir)" 
+      SkipUnchangedFiles="true"
+      OverwriteReadOnlyFiles="true" 
+      Retries="3"
+      RetryDelayMilliseconds="300"/>-->
+
+   </Target>
 </Project>

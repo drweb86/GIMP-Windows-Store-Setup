@@ -10,4 +10,6 @@ Visual Studio 2022
 # Workflow
 
 1. Open "src\Prepare.sln" in Visual Studio and launch it (F5)
-2.
+2. Open "src\Wrapper.sln" in Visual Studio
+3. Set in Solution Explorer "A Startup Project" Set as Startup Project via context menu
+

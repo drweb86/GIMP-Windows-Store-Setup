@@ -1,6 +1,8 @@
 ﻿using Microsoft.UI.Xaml;
 using System.Diagnostics;
+using System.Reflection;
 using System.Threading;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 using Windows.Globalization;
 using Windows.Storage;
@@ -31,7 +33,14 @@ namespace AudioRecorderV4
         /// <param name="args">Details about the launch request and process.</param>
         protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
         {
-            Process.Start("calc");
+            Package package = Package.Current;
+            PackageId packageId = package.Id;
+            PackageVersion version = packageId.Version;
+
+            var appFolder = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var file = System.IO.Path.Combine(appFolder, "bin", $"gimp-{version.Major}.{version.Minor}.exe");
+
+            Process.Start(new ProcessStartInfo() { FileName=file,  WorkingDirectory = System.IO.Path.GetDirectoryName(System.IO.Path.GetDirectoryName(file))});
         }
     }
 }

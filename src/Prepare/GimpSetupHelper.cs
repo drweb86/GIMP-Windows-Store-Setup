@@ -8,16 +8,17 @@ namespace DownloadInstaller
 {
     internal static class GimpSetupHelper
     {
-        internal static void CheckExecutableCanBeFound(string installSetup)
+        internal static void CheckExecutableCanBeFound(string installSetup, string version)
         {
             Log.Info("Checking that GIMP executable present in installation place");
 
             var binFolder = Path.Combine(installSetup, "bin");
 
-            var searchMask = "gimp-*.exe";
+            var parsedVersion = new Version(version);
+
+            var searchMask = $"gimp-{parsedVersion.Major}.{parsedVersion.Minor}.exe";
             var gimpExecutable = Directory.GetFiles(binFolder, searchMask)
-                .OrderBy(f => f.Length)
-                .FirstOrDefault();
+                .SingleOrDefault();
             
             if (gimpExecutable == null)
             {

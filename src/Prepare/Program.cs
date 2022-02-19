@@ -9,7 +9,7 @@ var dirs = TempDir.GetDirs();
 var setupExecutable = await GimpWebSiteUtil.Download(setupInfo.Link, dirs.DownloadSetup, setupInfo.FileName);
 InnoSetupHelper.InstallSilently(setupExecutable, dirs.InstallSetup);
 InnoSetupHelper.RemoveInstallationSpecificFiles(dirs.InstallSetup);
-GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup);
+GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup, setupInfo.Version);
 ManifestHelper.UpdateVersion(dirs, setupInfo.Version);
 Log.Info("Preparation is completed. Procceed with packaging.");
 
