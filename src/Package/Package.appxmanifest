@@ -20,7 +20,7 @@
   <Identity
     Name="26873SiarheiKuchuk.GimpTEST"
     Publisher="CN=48445635-F577-4A99-ABC2-E3554955850E"
-    Version="1.0.6.0" />
+    Version="3.4.5.0" />
 
   <Resources>
     <Resource Language="en" />
