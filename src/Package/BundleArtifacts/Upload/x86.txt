@@ -1,0 +1,2 @@
+MainPackage=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x86\Release\Upload\A Startup Project (Package)_1.0.5.0_x86.msix
+SymbolPackage=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x86\Release\Upload\A Startup Project (Package)_1.0.5.0\A Startup Project (Package)_1.0.5.0_x86.appxsym

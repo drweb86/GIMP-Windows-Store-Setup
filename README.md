@@ -9,5 +9,5 @@ Visual Studio 2022
 
 # Workflow
 
-1. Open "src\DownloadInstaller\DownloadInstaller\DownloadInstaller.sln" in Visual Studio and Click F5
+1. Open "src\Prepare.sln" in Visual Studio and launch it (F5)
 2.

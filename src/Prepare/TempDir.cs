@@ -17,7 +17,7 @@ namespace DownloadInstaller
             var tempFolder = new DirectoryInfo(
                 Path.Combine(
                     Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
-                    "../../../../../..",
+                    "../../../..",
                     "temp")).FullName;
 
             var dirs = new Dirs();

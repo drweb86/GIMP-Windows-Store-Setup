@@ -1,0 +1,7 @@
+MainPackage=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\A Startup Project (Package)_1.0.5.0_x64.msix
+SymbolPackage=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\obj\x64\Release\Symbols\A Startup Project (Package)_1.0.5.0_x64.appxsym
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\A Startup Project (Package)_1.0.5.0_language-ru.msix
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\A Startup Project (Package)_1.0.5.0_scale-100.msix
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\A Startup Project (Package)_1.0.5.0_scale-125.msix
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\A Startup Project (Package)_1.0.5.0_scale-150.msix
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\audio-recorder\src\AudioRecorderV4 (Package)\bin\x64\Release\A Startup Project (Package)_1.0.5.0_scale-400.msix
