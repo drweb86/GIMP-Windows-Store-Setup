@@ -12,34 +12,21 @@
 	  <RunPostBuildEvent>Always</RunPostBuildEvent>
 	  <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Resources.resw" />
-  </ItemGroup>
+	<!--<ItemGroup>
+		<SDKReference Include="WindowsDesktop">
+			<Name>Windows Desktop Extensions for the UWP</Name>
+		</SDKReference>
+	</ItemGroup>-->
 
   <ItemGroup>
+    <None Remove="Resources.resw" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
-
-<ItemGroup>
-		<None Include="$(SolutionDir)temp\install-setup\**\*.*">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-		</None>
-	</ItemGroup>
-
+	
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <!--<ItemGroup>
-      <SomeAppStuff Include="$(SolutionDir)temp\install-setup\**\*.*" />
-    </ItemGroup>
-    <Copy 
-      SourceFiles="@(SomeAppStaff)" 
-      DestinationFolder="$(OutputPath)\%(RecursiveDir)" 
-      SkipUnchangedFiles="true"
-      OverwriteReadOnlyFiles="true" 
-      Retries="3"
-      RetryDelayMilliseconds="300"/>-->
-
+	  <Exec Command="RMDIR &quot;$(ProjectDir)$(OutDir)\app&quot; /S /Q" />
+	  <Exec Command="xcopy &quot;$(SolutionDir)temp\install-setup&quot; &quot;$(ProjectDir)$(OutDir)\app&quot; /E /H /C /I /y" />
    </Target>
 </Project>
