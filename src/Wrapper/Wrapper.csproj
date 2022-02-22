@@ -12,11 +12,11 @@
 	  <RunPostBuildEvent>Always</RunPostBuildEvent>
 	  <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
   </PropertyGroup>
-	<!--<ItemGroup>
-		<SDKReference Include="WindowsDesktop">
+	<ItemGroup>
+		<SDKReference Include="WindowsDesktop, Version=10.0.19041.0">
 			<Name>Windows Desktop Extensions for the UWP</Name>
 		</SDKReference>
-	</ItemGroup>-->
+	</ItemGroup>
 
   <ItemGroup>
     <None Remove="Resources.resw" />

@@ -10,26 +10,13 @@ namespace DownloadInstaller
             Log.Info($"Update version {version} in {file}.");
 
             var xmlDoc = new XmlDocument();
-
+            xmlDoc.PreserveWhitespace = true;
             xmlDoc.Load(file);
 
-            bool found = false;
-            foreach (XmlNode node in xmlDoc.DocumentElement.ChildNodes) // XPATH does nt work
-            {
-                if (node.Name == "Identity")
-                {
-                    var parsedVersion = new Version(version);
-                    var parsedVersionWithRevision = new Version(parsedVersion.Major, parsedVersion.Minor, parsedVersion.Build, 0);
-                    node.Attributes["Version"].Value = parsedVersionWithRevision.ToString(4);
-                    found = true;
-                }
-            }
-
-            if (!found)
-            {
-                Log.Error($"Node with version was not found!");
-                throw new Exception("Node with version was not found.");
-            }
+            var parsedVersion = new Version(version);
+            var parsedVersionWithRevision = new Version(parsedVersion.Major, parsedVersion.Minor, parsedVersion.Build, 0);
+            xmlDoc.DocumentElement.Go("Identity").SetAttr("Version", parsedVersionWithRevision.ToString(4));
+            xmlDoc.DocumentElement.Go("Applications").Go("Application").Go("Extensions").Go("desktop:Extension").SetAttr("Executable", $"app\\bin\\gimp-{parsedVersion.Major}.{parsedVersion.Minor}.exe");
 
             if (File.Exists(file))
                 File.Delete(file);
@@ -37,4 +24,5 @@ namespace DownloadInstaller
             Log.Info($"Version is updated.");
         }
     }
+
 }
