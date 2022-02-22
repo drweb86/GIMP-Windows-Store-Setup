@@ -80,4 +80,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Launcher\Launcher.csproj" />
   </ItemGroup>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="RMDIR &quot;$(ProjectDir)$(OutDir)\app&quot; /S /Q" />
+		<Exec Command="RMDIR &quot;$(ProjectDir)$(OutDir)\AppX\app&quot; /S /Q" />
+		<Exec Command="xcopy &quot;$(SolutionDir)temp\install-setup&quot; &quot;$(ProjectDir)$(OutDir)\AppX\app&quot; /E /H /C /I /y" />
+	</Target>
 </Project>

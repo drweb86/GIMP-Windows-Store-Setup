@@ -156,15 +156,4 @@
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="RMDIR &quot;$(ProjectDir)$(OutDir)\app&quot; /S /Q" />
-    <Exec Command="xcopy &quot;$(SolutionDir)temp\install-setup&quot; &quot;$(ProjectDir)$(OutDir)\app&quot; /E /H /C /I /y" />
-  </Target>
 </Project>
