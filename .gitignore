@@ -3,3 +3,4 @@ temp
 bin
 .vs
 src/Package/AppPackages/
+src/Archive/

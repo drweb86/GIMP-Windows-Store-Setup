@@ -16,7 +16,6 @@ namespace DownloadInstaller
             var parsedVersion = new Version(version);
             var parsedVersionWithRevision = new Version(parsedVersion.Major, parsedVersion.Minor, parsedVersion.Build, 0);
             xmlDoc.DocumentElement.Go("Identity").SetAttr("Version", parsedVersionWithRevision.ToString(4));
-            xmlDoc.DocumentElement.Go("Applications").Go("Application").Go("Extensions").Go("desktop:Extension").SetAttr("Executable", $"app\\bin\\gimp-{parsedVersion.Major}.{parsedVersion.Minor}.exe");
 
             if (File.Exists(file))
                 File.Delete(file);

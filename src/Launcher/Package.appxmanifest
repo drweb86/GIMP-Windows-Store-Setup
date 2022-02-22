@@ -29,7 +29,7 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <desktop:Extension Category="windows.fullTrustProcess" Executable="app\bin\gimp-2.10.exe" />
+		  <desktop:Extension Category="windows.fullTrustProcess" Executable="Launcher.FullTrust\Launcher.FullTrust.exe"  />
       </Extensions>
     </Application>
   </Applications>

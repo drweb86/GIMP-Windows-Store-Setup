@@ -83,7 +83,7 @@
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="RMDIR &quot;$(ProjectDir)$(OutDir)\AppX\Launcher.FullTrust&quot; /S /Q" />
     <Exec Command="RMDIR &quot;$(ProjectDir)$(OutDir)\AppX\app&quot; /S /Q" />
-    <Exec Command="xcopy &quot;$(SolutionDir)temp\install-setup&quot; &quot;$(ProjectDir)$(OutDir)\AppX\app&quot; /E /H /C /I /y" />
+    <Exec Command="xcopy &quot;$(SolutionDir)temp\Archive&quot; &quot;$(ProjectDir)$(OutDir)\AppX\Archive&quot; /E /H /C /I /y" />
     <Exec Command="xcopy &quot;$(SolutionDir)Launcher.FullTrust\bin\debug\net6.0-windows&quot; &quot;$(ProjectDir)$(OutDir)\AppX\Launcher.FullTrust&quot; /E /H /C /I /y" />
   </Target>
 </Project>

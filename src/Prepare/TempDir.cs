@@ -18,16 +18,23 @@ namespace DownloadInstaller
             dirs.Temp = tempFolder;
             dirs.DownloadSetup = Path.Combine(dirs.Temp, "download-setup");
             dirs.InstallSetup = Path.Combine(dirs.Temp, "install-setup");
-            dirs.Package = Path.Combine(dirs.Temp, "../Launcher");
+            dirs.Package = Path.Combine(dirs.Temp, "../LauncherPackage");
+            dirs.ArchiveFolder = Path.Combine(dirs.Temp, "Archive");
 
             if (Directory.Exists(dirs.InstallSetup))
             {
                 Log.Debug("Cleaning the install folder");
                 Directory.Delete(dirs.InstallSetup, true);
             }
+            if (Directory.Exists(dirs.ArchiveFolder))
+            {
+                Log.Debug("Cleaning the archive folder");
+                Directory.Delete(dirs.ArchiveFolder, true);
+            }
             Directory.CreateDirectory(dirs.Temp);
             Directory.CreateDirectory(dirs.DownloadSetup);
             Directory.CreateDirectory(dirs.InstallSetup);
+            Directory.CreateDirectory(dirs.ArchiveFolder);
 
             return dirs;
         }

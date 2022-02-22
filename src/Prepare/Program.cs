@@ -10,6 +10,7 @@ var setupExecutable = await GimpWebSiteUtil.Download(setupInfo.Link, dirs.Downlo
 InnoSetupHelper.InstallSilently(setupExecutable, dirs.InstallSetup);
 InnoSetupHelper.RemoveInstallationSpecificFiles(dirs.InstallSetup);
 GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup, setupInfo.Version);
+GimpSetupHelper.Pack(dirs.InstallSetup, dirs.ArchiveFolder, setupInfo.Version);
 ManifestHelper.UpdateVersion(dirs, setupInfo.Version);
 Log.Info("Completed. Now open App.sln and procceed with packaging.");
 
