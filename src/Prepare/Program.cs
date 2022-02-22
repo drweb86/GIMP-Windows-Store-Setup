@@ -1,6 +1,6 @@
 ﻿using DownloadInstaller;
 
-Log.Info("Application performs preparation steps for packaging the GIMP");
+Log.Info("Preparing...");
 
 var setupInfo = await GimpWebSiteUtil.GetDownloadLink();
 
@@ -11,6 +11,6 @@ InnoSetupHelper.InstallSilently(setupExecutable, dirs.InstallSetup);
 InnoSetupHelper.RemoveInstallationSpecificFiles(dirs.InstallSetup);
 GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup, setupInfo.Version);
 ManifestHelper.UpdateVersion(dirs, setupInfo.Version);
-Log.Info("Preparation is completed. Procceed with packaging.");
+Log.Info("Completed. Now open App.sln and procceed with packaging.");
 
 return 0;

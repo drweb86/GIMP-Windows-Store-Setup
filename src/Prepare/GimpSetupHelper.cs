@@ -10,7 +10,7 @@ namespace DownloadInstaller
     {
         internal static void CheckExecutableCanBeFound(string installSetup, string version)
         {
-            Log.Info("Checking that GIMP executable present in installation place");
+            Log.Debug("Checking that GIMP executable present in installation place");
 
             var binFolder = Path.Combine(installSetup, "bin");
 
@@ -26,7 +26,7 @@ namespace DownloadInstaller
                 throw new Exception("Executable cannot be found.");
             }
 
-            Log.Confirm($"Gimp executable: {gimpExecutable}");
+            Log.Debug($"Gimp executable: {gimpExecutable}");
 
         }
     }

@@ -18,7 +18,7 @@ namespace DownloadInstaller
     {
         public static async Task<WebSiteLinkInfo> GetDownloadLink()
         {
-            Log.Info("Getting URL of latest Windows GIMP Setup");
+            Log.Debug("Getting URL of latest Windows GIMP Setup");
 
             var url = "https://www.gimp.org/downloads/";
             var linkXPath = "//a[@id='win-download-link']";
@@ -36,21 +36,21 @@ namespace DownloadInstaller
             if (href.StartsWith("//"))
                 href = "https:" + href;
 
-            Log.Confirm($"Download link: {href}");
+            Log.Info($"URL: {href}");
 
-            Log.Info($"Extracting version from the link");
+            Log.Debug($"Extracting version from the link");
             int startPos = href.IndexOf('-') + 1;
             int endPos = href.LastIndexOf('-');
             string version = href.Substring(startPos, endPos - startPos);
             string filename = href.Substring(href.LastIndexOf('/') + 1);
-            Log.Confirm($"Version: {version}");
+            Log.Info($"Version: {version}");
 
             return new WebSiteLinkInfo { Link = href, Version = version, FileName = filename };
         }
 
         public static async Task<string> Download(string url, string folder, string fileName)
         {
-            Log.Info($"Downloading {url} into {folder} with name {fileName}");
+            Log.Debug($"Downloading {url} into {folder} with name {fileName}");
 
             var destinationFile = Path.Combine(folder, fileName);
             if (File.Exists(destinationFile))
@@ -63,7 +63,7 @@ namespace DownloadInstaller
             if (File.Exists(destinationFileDownload))
                 File.Delete(destinationFileDownload);
 
-            Log.Info($"Downloading!\nPlease wait.");
+            Log.Debug($"Downloading!\nPlease wait.");
             using (HttpClient client = new HttpClient())
             {
                 using (var response = await client.GetAsync(url))
@@ -75,7 +75,7 @@ namespace DownloadInstaller
                 }
             }
 
-            Log.Info($"Setup is downloaded.");
+            Log.Debug($"Setup is downloaded.");
             File.Move(destinationFileDownload, destinationFile);
             return destinationFile;
         }

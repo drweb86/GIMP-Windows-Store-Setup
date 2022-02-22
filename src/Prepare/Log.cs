@@ -19,13 +19,12 @@ namespace DownloadInstaller
             Console.ForegroundColor = previousColor;
         }
 
-        public static void Confirm(string text)
+        public static void Debug(string error)
         {
             var previousColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"Please check the following statement\n\n{text}\n\nIf the information above is correct press <Enter>, otherwise Ctrl+C");
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.Out.WriteLine(error);
             Console.ForegroundColor = previousColor;
-            Console.ReadLine();
         }
     }
 }

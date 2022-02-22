@@ -7,7 +7,7 @@ namespace DownloadInstaller
         public static void UpdateVersion(Dirs dirs, string version)
         {
             var file = Path.Combine(dirs.Package, "Package.appxmanifest");
-            Log.Info($"Update version {version} in {file}.");
+            Log.Debug($"Update version & executable name {version} in {file}.");
 
             var xmlDoc = new XmlDocument();
             xmlDoc.PreserveWhitespace = true;
@@ -21,7 +21,7 @@ namespace DownloadInstaller
             if (File.Exists(file))
                 File.Delete(file);
             xmlDoc.Save(file);
-            Log.Info($"Version is updated.");
+            Log.Debug($"Version is updated.");
         }
     }
 
