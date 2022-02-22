@@ -16,11 +16,11 @@ namespace Launcher
 
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            var a = Assembly.GetExecutingAssembly().Location;
             if (ApiInformation.IsApiContractPresent("Windows.ApplicationModel.FullTrustAppContract", 1, 0))
             {
                 FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync().AsTask().Wait();
             }
+            
         }
     }
 }
