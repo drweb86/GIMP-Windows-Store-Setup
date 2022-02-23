@@ -14,21 +14,7 @@ namespace Launcher.FullTrust
         static void Main()
         {
             var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var archive = Directory
-                .GetFiles(
-                    new DirectoryInfo(Path.Combine(appFolder, "..", "Archive")).FullName,
-                    "gimp-binaries-*.zip"
-                )
-                .OrderByDescending(x => x)
-                .First();
-
-            var archiveState = Directory
-                .GetFiles(
-                    new DirectoryInfo(Path.Combine(appFolder, "..", "Archive")).FullName,
-                    "gimp-binaries-*.json"
-                )
-                .OrderByDescending(x => x)
-                .First();
+            var archive = Path.Combine(appFolder, "gimp-binaries.zip");
 
             var destinationFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(archive));
 
@@ -59,8 +45,8 @@ namespace Launcher.FullTrust
 
             var archiveState = Directory
                 .GetFiles(
-                    new DirectoryInfo(Path.Combine(appFolder, "..", "Archive")).FullName,
-                    "gimp-binaries-*.json"
+                    appFolder,
+                    "gimp-binaries.json"
                 )
                 .OrderByDescending(x => x)
                 .First();

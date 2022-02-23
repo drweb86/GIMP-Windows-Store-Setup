@@ -60,7 +60,7 @@
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
@@ -151,6 +151,8 @@
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Images\Wide310x150Logo.scale-400.png" />
     <Content Include="Package.StoreAssociation.xml" />
+    <Content Include="Win32\gimp-binaries.json" />
+    <Content Include="Win32\gimp-binaries.zip" />
     <Content Include="Win32\Launcher.FullTrust.deps.json" />
     <Content Include="Win32\Launcher.FullTrust.dll" />
     <Content Include="Win32\Launcher.FullTrust.exe" />
@@ -165,8 +167,6 @@
     <ProjectReference Include="..\Launcher\Launcher.csproj" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="RMDIR &quot;$(ProjectDir)$(OutDir)\AppX\Win32&quot; /S /Q" />
-    <Exec Command="xcopy &quot;$(SolutionDir)temp\Archive&quot; &quot;$(ProjectDir)$(OutDir)\AppX\Win32&quot; /E /H /C /I /y" />
     <Exec Command="xcopy &quot;$(ProjectDir)Win32&quot; &quot;$(ProjectDir)$(OutDir)\AppX\Win32&quot; /E /H /C /I /y" />
   </Target>
 </Project>

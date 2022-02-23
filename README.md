@@ -13,6 +13,8 @@ Visual Studio 2022
 2. Solution Explorer right click "Prepare" project, "Set as startup project"
 3. Launch it (F5)
 
-2. Open "src\Wrapper.sln" in Visual Studio
-3. Set in Solution Explorer "A Startup Project" Set as Startup Project via context menu
+4. Open "src\Wrapper.sln" in Visual Studio and Menu \ Build \ Rebuild Solution
+5. Solution Explorer right click "LauncherPackage" project, Publish \ Create App Packages
+
+6. Publish src\LauncherPackage\AppPackages\LauncherPackage_XXXX_bundle.appxupload to store
 

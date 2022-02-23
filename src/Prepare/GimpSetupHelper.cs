@@ -55,20 +55,24 @@ namespace DownloadInstaller
             }
         }
 
-        internal static void Pack(string installSetup, string archiveFolder, string version)
+        internal static void Pack(string installSetup, string package)
         {
-            var archive = Path.Combine(archiveFolder, $"gimp-binaries-{version}.zip");
+            var destinationDir = Path.Combine(package, "Win32");
+
+            var archive = Path.Combine(destinationDir, $"gimp-binaries.zip");
+            if (File.Exists(archive))
+                File.Delete(archive);
             Log.Debug($"Packing {installSetup} to {archive}.\nPlease wait.");
             ZipFile.CreateFromDirectory(installSetup, archive, CompressionLevel.Optimal, false);
             Log.Debug($"Packed");
             Log.Debug($"Saving state");
-            WriteFilesList(installSetup, archiveFolder, version);
+            WriteFilesList(installSetup, destinationDir);
             Log.Debug($"State saved");
         }
 
-        internal static void WriteFilesList(string installSetup, string archiveFolder, string version)
+        internal static void WriteFilesList(string installSetup, string destinationDir)
         {
-            var jsonFile = Path.Combine(archiveFolder, $"gimp-binaries-{version}.json");
+            var jsonFile = Path.Combine(destinationDir, $"gimp-binaries.json");
 
             var data = new List<ItemInfo>();
             var files = Directory.GetFiles(installSetup, "*.*", SearchOption.AllDirectories);
