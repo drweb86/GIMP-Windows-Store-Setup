@@ -39,7 +39,7 @@ namespace Launcher.FullTrust
                 ZipFile.ExtractToDirectory(archive, destinationFolder);
             }
 
-            Execute(destinationFolder);
+            Execute(destinationFolder, appFolder);
         }
 
         private static void RemoveFolder(string destinationFolder)
@@ -84,9 +84,26 @@ namespace Launcher.FullTrust
             return true;
         }
 
-        private static bool Execute(string destinationFolder)
+        private static bool Execute(string destinationFolder, string appFolder)
         {
-            ParentProcessUtilities.GetParentProcess()?.Kill();
+            var appFolderCaseCpecific = new DirectoryInfo(appFolder).Parent.FullName;
+
+            var processes = Process.GetProcessesByName("Launcher");
+            foreach (var process in processes)
+            {
+                try
+                {
+                    if (process.MainModule.FileName.StartsWith(appFolderCaseCpecific, StringComparison.OrdinalIgnoreCase))
+                    {
+                        process.Kill();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            
             var gimpFolder = Path.Combine(destinationFolder, "bin");
             if (!Directory.Exists(gimpFolder))
             {
