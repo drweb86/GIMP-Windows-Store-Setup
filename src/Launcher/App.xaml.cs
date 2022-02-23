@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation.Metadata;
@@ -20,7 +19,7 @@ namespace Launcher
             {
                 FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync().AsTask().Wait();
             }
-            Application.Current.Exit();
+            Current.Exit();
         }
     }
 }

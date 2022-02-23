@@ -4,3 +4,5 @@ bin
 .vs
 src/Package/AppPackages/
 src/Archive/
+src/LauncherPackage/AppPackages/
+src/LauncherPackage/Win32/

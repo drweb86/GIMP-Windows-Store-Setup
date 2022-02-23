@@ -19,6 +19,7 @@ namespace DownloadInstaller
             dirs.DownloadSetup = Path.Combine(dirs.Temp, "download-setup");
             dirs.InstallSetup = Path.Combine(dirs.Temp, "install-setup");
             dirs.Package = Path.Combine(dirs.Temp, "../LauncherPackage");
+            dirs.LauncherFullTrustAnyCpuDebug = Path.Combine(dirs.Temp, "..", "Launcher.FullTrust", "bin", "Release", "net6.0-windows");
             dirs.ArchiveFolder = Path.Combine(dirs.Temp, "Archive");
 
             if (Directory.Exists(dirs.InstallSetup))

@@ -32,6 +32,29 @@ namespace DownloadInstaller
 
         }
 
+        internal static void CopyLauncherFullTrust(string launcherFullTrustAnyCpuDebug, string package)
+        {
+            var destinationDir = Path.Combine(package, "Win32");
+            Log.Debug($"Copy launcher full trust executable from {launcherFullTrustAnyCpuDebug} to {destinationDir}");
+            CopyFilesRecursively(launcherFullTrustAnyCpuDebug, destinationDir);
+            Log.Debug($"Copy completed.");
+        }
+
+        private static void CopyFilesRecursively(string sourcePath, string targetPath)
+        {
+            //Now Create all of the directories
+            foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
+            {
+                Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
+            }
+
+            //Copy all the files & Replaces any files with the same name
+            foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
+            {
+                File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
+            }
+        }
+
         internal static void Pack(string installSetup, string archiveFolder, string version)
         {
             var archive = Path.Combine(archiveFolder, $"gimp-binaries-{version}.zip");
@@ -57,11 +80,5 @@ namespace DownloadInstaller
             string json = JsonSerializer.Serialize(data);
             File.WriteAllText(jsonFile, json);
         }
-    }
-
-    public class ItemInfo
-    {
-        public string File { get; set; }
-        public long Size { get; set; }
     }
 }
