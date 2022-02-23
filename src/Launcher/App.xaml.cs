@@ -19,7 +19,10 @@ namespace Launcher
             {
                 FullTrustProcessLauncher.LaunchFullTrustProcessForCurrentAppAsync().AsTask().Wait();
             }
-            Current.Exit();
+            else
+            {
+                Current.Exit();
+            }
         }
     }
 }

@@ -86,6 +86,7 @@ namespace Launcher.FullTrust
 
         private static bool Execute(string destinationFolder)
         {
+            ParentProcessUtilities.GetParentProcess()?.Kill();
             var gimpFolder = Path.Combine(destinationFolder, "bin");
             if (!Directory.Exists(gimpFolder))
             {

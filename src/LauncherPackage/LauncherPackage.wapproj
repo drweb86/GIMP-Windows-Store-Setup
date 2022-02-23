@@ -150,7 +150,6 @@
     <Content Include="Images\Wide310x150Logo.scale-150.png" />
     <Content Include="Images\Wide310x150Logo.scale-200.png" />
     <Content Include="Images\Wide310x150Logo.scale-400.png" />
-    <Content Include="Launcher.FullTrust.exe" />
     <Content Include="Package.StoreAssociation.xml" />
     <Content Include="Win32\Launcher.FullTrust.deps.json" />
     <Content Include="Win32\Launcher.FullTrust.dll" />
