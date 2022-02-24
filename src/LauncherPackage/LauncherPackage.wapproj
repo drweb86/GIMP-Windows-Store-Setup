@@ -58,7 +58,7 @@
     <NoWarn>$(NoWarn);NU1702</NoWarn>
     <EntryPointProjectUniqueName>..\Launcher\Launcher.csproj</EntryPointProjectUniqueName>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
-    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundlePlatforms>x86|x64</AppxBundlePlatforms>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
@@ -152,16 +152,19 @@
     <Content Include="Images\Wide310x150Logo.scale-400.png" />
     <Content Include="Package.StoreAssociation.xml" />
     <Content Include="Win32\gimp-binaries.json" />
-    <Content Include="Win32\gimp-binaries.zip" />
+    <Content Include="Win32\gimp-binaries.7z" />
     <Content Include="Win32\Launcher.FullTrust.deps.json" />
     <Content Include="Win32\Launcher.FullTrust.dll" />
     <Content Include="Win32\Launcher.FullTrust.exe" />
     <Content Include="Win32\Launcher.FullTrust.pdb" />
     <Content Include="Win32\Launcher.FullTrust.runtimeconfig.json" />
+    <Content Include="Win32\x64\7z.dll" />
+    <Content Include="Win32\x86\7z.dll" />
+    <Content Include="Win32\SevenZipExtractor.dll" />
   </ItemGroup>
   <Import Project="$(WapProjPath)\Microsoft.DesktopBridge.targets" />
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" PrivateAssets="all" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Launcher\Launcher.csproj" />

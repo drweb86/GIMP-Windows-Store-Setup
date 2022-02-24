@@ -59,11 +59,18 @@ namespace DownloadInstaller
         {
             var destinationDir = Path.Combine(package, "Win32");
 
-            var archive = Path.Combine(destinationDir, $"gimp-binaries.zip");
+            var archive = Path.Combine(destinationDir, $"gimp-binaries.7z");
             if (File.Exists(archive))
                 File.Delete(archive);
             Log.Debug($"Packing {installSetup} to {archive}.\nPlease wait.");
-            ZipFile.CreateFromDirectory(installSetup, archive, CompressionLevel.Optimal, false);
+            ProcessHelper.Execute(@"c:\Program Files\7-zip\7z.exe", $"a -t7z -mx=9 -mfb=273 -ms -md=31 -myx=9 -mtm=- -mmt -mmtf -md=1536m -mmf=bt3 -mmc=10000 -mpb=0 -mlc=0 gimp-binaries.7z \"{installSetup}\"\\*", destinationDir,
+                out string stdOutput, out string stdError, out int returnCode);
+            if (returnCode != 0)
+            {
+                Log.Error(stdOutput);
+                Log.Error(stdError);
+                throw new Exception();
+            }
             Log.Debug($"Packed");
             Log.Debug($"Saving state");
             WriteFilesList(installSetup, destinationDir);

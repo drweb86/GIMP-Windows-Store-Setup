@@ -1,3 +1,4 @@
+using SevenZipExtractor;
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Reflection;
@@ -14,7 +15,7 @@ namespace Launcher.FullTrust
         static void Main()
         {
             var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var archive = Path.Combine(appFolder, "gimp-binaries.zip");
+            var archive = Path.Combine(appFolder, "gimp-binaries.7z");
 
             var destinationFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(archive));
 
@@ -22,7 +23,10 @@ namespace Launcher.FullTrust
             {
                 RemoveFolder(destinationFolder);
                 Directory.CreateDirectory(destinationFolder);
-                ZipFile.ExtractToDirectory(archive, destinationFolder);
+                using (ArchiveFile archiveFile = new ArchiveFile(archive))
+                {
+                    archiveFile.Extract(destinationFolder);
+                }
             }
 
             Execute(destinationFolder, appFolder);

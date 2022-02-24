@@ -6,6 +6,7 @@ The project for setup and GIMP Windows Store Setup maintanance.
 
 Windows 11 x-64
 Visual Studio 2022
+7-Zip X64 installed to default location
 
 # Workflow
 
