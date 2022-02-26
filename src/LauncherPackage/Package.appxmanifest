@@ -4,7 +4,7 @@
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
   </Capabilities>
-  <Identity Name="26873SiarheiKuchuk.GimpTEST" Publisher="CN=48445635-F577-4A99-ABC2-E3554955850E" Version="2.10.30.0" />
+  <Identity Name="26873SiarheiKuchuk.GimpTEST" Publisher="CN=48445635-F577-4A99-ABC2-E3554955850E" Version="2.11.30.0" />
 
   <Properties>
     <DisplayName>GimpTEST</DisplayName>

@@ -12,7 +12,6 @@ InnoSetupHelper.RemoveInstallationSpecificFiles(dirs.InstallSetup);
 GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup, setupInfo.Version);
 GimpSetupHelper.Pack(dirs.InstallSetup, dirs.Package);
 GimpSetupHelper.CopyLauncherFullTrust(dirs.LauncherFullTrustAnyCpuDebug, dirs.Package);
-ManifestHelper.UpdateVersion(dirs, setupInfo.Version);
 Log.Info("Completed. Now open App.sln and procceed with packaging.");
 
 return 0;

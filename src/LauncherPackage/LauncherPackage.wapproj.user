@@ -12,6 +12,6 @@
     <PackageLogoSource>C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\Icons\1080.png</PackageLogoSource>
     <UapAppxPackageBuildMode>StoreAndSideload</UapAppxPackageBuildMode>
     <AppxBuildConfigurationSelection>x86|x64</AppxBuildConfigurationSelection>
-    <PackageOptionalProjectsInIdeBuilds>False</PackageOptionalProjectsInIdeBuilds>
+    <PackageOptionalProjectsInIdeBuilds>True</PackageOptionalProjectsInIdeBuilds>
   </PropertyGroup>
 </Project>
