@@ -15,24 +15,26 @@ namespace DownloadInstaller
             var dirs = new ApplicationFolders();
             dirs.Temp = tempFolder;
             dirs.DownloadSetup = Path.Combine(dirs.Temp, "download-setup");
-            dirs.InstallSetup = Path.Combine(dirs.Temp, "install-setup");
-            dirs.Package = Path.Combine(dirs.Temp, "../LauncherPackage");
+            dirs.InstallDir = Path.Combine(dirs.Temp, "install-setup");
+            dirs.LauncherProjectDir = Path.Combine(dirs.Temp, "../LauncherPackage");
             dirs.LauncherFullTrustAnyCpuDebug = Path.Combine(dirs.Temp, "..", "Launcher.FullTrust", "bin", "Release", "net6.0-windows");
             dirs.ArchiveFolder = Path.Combine(dirs.Temp, "Archive");
 
-            if (Directory.Exists(dirs.InstallSetup))
+            if (Directory.Exists(dirs.InstallDir))
             {
-                Log.Debug("Cleaning the install folder");
-                Directory.Delete(dirs.InstallSetup, true);
+                Console.WriteLine($"Cleaning folder {dirs.InstallDir}");
+                Directory.Delete(dirs.InstallDir, true);
             }
+
             if (Directory.Exists(dirs.ArchiveFolder))
             {
-                Log.Debug("Cleaning the archive folder");
+                Console.WriteLine($"Cleaning folder {dirs.ArchiveFolder}");
                 Directory.Delete(dirs.ArchiveFolder, true);
             }
+
             Directory.CreateDirectory(dirs.Temp);
             Directory.CreateDirectory(dirs.DownloadSetup);
-            Directory.CreateDirectory(dirs.InstallSetup);
+            Directory.CreateDirectory(dirs.InstallDir);
             Directory.CreateDirectory(dirs.ArchiveFolder);
 
             return dirs;

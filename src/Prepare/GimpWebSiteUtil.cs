@@ -4,7 +4,7 @@ namespace DownloadInstaller
 {
     internal static class GimpWebSiteUtil
     {
-        public static DownloadLinkInfo GetWindowsSetupDownloadLinkInfo()
+        public static string GetWindowsSetupUrl()
         {
             var downloadPage = "https://www.gimp.org/downloads/";
             var linkXPath = "//a[@id='win-download-link']";
@@ -24,44 +24,34 @@ namespace DownloadInstaller
 
             Console.WriteLine($"URL: {link}");
 
-            int startPos = link.IndexOf('-') + 1;
-            int endPos = link.LastIndexOf('-');
-            string version = link.Substring(startPos, endPos - startPos);
-            string filename = link.Substring(link.LastIndexOf('/') + 1);
-            Log.Info($"Version: {version}");
-
-            return new DownloadLinkInfo { Link = link, FileName = filename };
+            return link;
         }
 
-        public static async Task<string> Download(string url, string folder, string fileName)
+        public static async Task<string> Download(string url, string folder)
         {
-            Log.Debug($"Downloading {url} into {folder} with name {fileName}");
+            var destinationFile = Path.Combine(folder, $"setup-{url.GetHashCode()}.exe");
 
-            var destinationFile = Path.Combine(folder, fileName);
+            Console.WriteLine($"Downloading file {url} to {destinationFile}");
+            
             if (File.Exists(destinationFile))
             {
-                Log.Info("File is already downloaded. Download is skipped.");
+                Console.WriteLine("File is already downloaded. Skipping.");
                 return destinationFile;
             }
 
-            var destinationFileDownload = destinationFile + "_";
-            if (File.Exists(destinationFileDownload))
-                File.Delete(destinationFileDownload);
+            var temporaryDownloadFile = destinationFile + "_";
+            if (File.Exists(temporaryDownloadFile))
+                File.Delete(temporaryDownloadFile);
 
-            Log.Debug($"Downloading!\nPlease wait.");
-            using (HttpClient client = new HttpClient())
-            {
-                using (var response = await client.GetAsync(url))
-                {
-                    using (var fs = new FileStream(destinationFileDownload, FileMode.CreateNew))
-                    {
-                        await response.Content.CopyToAsync(fs);
-                    }
-                }
-            }
+            Console.WriteLine($"Downloading! Please wait...");
+            using (var httpClient = new HttpClient())
+                using (var httpResponse = await httpClient.GetAsync(url))
+                    using (var fileStream = new FileStream(temporaryDownloadFile, FileMode.CreateNew))
+                        await httpResponse.Content.CopyToAsync(fileStream);
 
-            Log.Debug($"Setup is downloaded.");
-            File.Move(destinationFileDownload, destinationFile);
+            Console.WriteLine($"Downloaded is completed.");
+            File.Move(temporaryDownloadFile, destinationFile);
+
             return destinationFile;
         }
     }
