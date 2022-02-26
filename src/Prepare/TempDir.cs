@@ -2,7 +2,6 @@
 
 namespace DownloadInstaller
 {
-
     internal static class TempDir
     {
         public static Dirs GetDirs()

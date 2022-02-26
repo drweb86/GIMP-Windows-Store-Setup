@@ -1,7 +1,5 @@
 ﻿using DownloadInstaller;
 
-Log.Info("Preparing...");
-
 var setupInfo = await GimpWebSiteUtil.GetDownloadLink();
 
 var dirs = TempDir.GetDirs();
@@ -12,6 +10,5 @@ InnoSetupHelper.RemoveInstallationSpecificFiles(dirs.InstallSetup);
 GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup, setupInfo.Version);
 GimpSetupHelper.Pack(dirs.InstallSetup, dirs.Package);
 GimpSetupHelper.CopyLauncherFullTrust(dirs.LauncherFullTrustAnyCpuDebug, dirs.Package);
-Log.Info("Completed. Now open App.sln and procceed with packaging.");
 
 return 0;

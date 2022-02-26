@@ -13,7 +13,7 @@ namespace DownloadInstaller
                     return node;
                 }
             }
-            throw new Exception("Cannot find node " + childName);
+            throw new Exception($"Cannot find node {childName}");
         }
 
         public static XmlNode SetAttr(this XmlNode root, string attribute, string value)
@@ -22,5 +22,4 @@ namespace DownloadInstaller
             return root;
         }
     }
-
 }

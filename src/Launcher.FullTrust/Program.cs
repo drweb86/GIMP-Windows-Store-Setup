@@ -1,6 +1,5 @@
 using SevenZipExtractor;
 using System.Diagnostics;
-using System.IO.Compression;
 using System.Reflection;
 using System.Text.Json;
 
@@ -8,28 +7,27 @@ namespace Launcher.FullTrust
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            var appFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var archive = Path.Combine(appFolder, "gimp-binaries.7z");
+            var applicationFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var binariesArchive = Path.Combine(applicationFolder, "gimp-binaries.7z");
+            var binariesState = Path.Combine(binariesArchive, "gimp-binaries.json");
 
-            var destinationFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(archive));
+            var destinationFolder = Path.Combine(Path.GetTempPath(), Path.GetFileNameWithoutExtension(binariesArchive));
 
-            if (!VerifyFiles(destinationFolder, appFolder))
+            if (!IsFilesValid(destinationFolder, binariesState))
             {
                 RemoveFolder(destinationFolder);
                 Directory.CreateDirectory(destinationFolder);
-                using (ArchiveFile archiveFile = new ArchiveFile(archive))
+                using (var archiveFile = new ArchiveFile(binariesArchive))
                 {
                     archiveFile.Extract(destinationFolder);
                 }
             }
 
-            Execute(destinationFolder, appFolder);
+            KillParentUWA(applicationFolder);
+            LaunchExecutable(destinationFolder);
         }
 
         private static void RemoveFolder(string destinationFolder)
@@ -40,23 +38,15 @@ namespace Launcher.FullTrust
             }
         }
 
-        private static bool VerifyFiles(string destinationFolder, string appFolder)
+        private static bool IsFilesValid(string destinationFolder, string binariesState)
         {
             if (!Directory.Exists(destinationFolder))
             {
                 return false;
             }
 
-            var archiveState = Directory
-                .GetFiles(
-                    appFolder,
-                    "gimp-binaries.json"
-                )
-                .OrderByDescending(x => x)
-                .First();
-
-            var state = File.ReadAllText(archiveState);
-            var itemInfos = JsonSerializer.Deserialize<List<ItemInfo>>(state);
+            var binariesStateContent = File.ReadAllText(binariesState);
+            var itemInfos = JsonSerializer.Deserialize<List<ItemInfo>>(binariesStateContent);
             foreach (var itemInfo in itemInfos)
             {
                 var file = Path.Combine(destinationFolder, itemInfo.File);
@@ -65,7 +55,7 @@ namespace Launcher.FullTrust
                     return false;
                 }
 
-                if ( (new FileInfo(file)).Length  != itemInfo.Size)
+                if (new FileInfo(file).Length != itemInfo.Size)
                 {
                     return false;
                 }
@@ -74,7 +64,22 @@ namespace Launcher.FullTrust
             return true;
         }
 
-        private static bool Execute(string destinationFolder, string appFolder)
+        private static void LaunchExecutable(string destinationFolder)
+        {
+            var gimpFolder = Path.Combine(destinationFolder, "bin");
+
+            var gimp = Directory
+                .GetFiles(gimpFolder, "gimp-*.*.exe")
+                .OrderBy(x => x.Length)
+                .FirstOrDefault();
+
+            if (gimp == null)
+                return;
+
+            Process.Start(new ProcessStartInfo(gimp) { WorkingDirectory = gimpFolder });
+        }
+
+        private static void KillParentUWA(string appFolder)
         {
             var appFolderCaseCpecific = new DirectoryInfo(appFolder).Parent.FullName;
 
@@ -93,27 +98,6 @@ namespace Launcher.FullTrust
 
                 }
             }
-            
-            var gimpFolder = Path.Combine(destinationFolder, "bin");
-            if (!Directory.Exists(gimpFolder))
-            {
-                return false;
-            }
-
-            var gimp = Directory
-                .GetFiles(gimpFolder, "gimp-*.*.exe")
-                .OrderBy(x => x.Length)
-                .FirstOrDefault();
-            if (gimp == null)
-                return false;
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(gimp) { WorkingDirectory = gimpFolder });
-            return true;
         }
-    }
-
-    public class ItemInfo
-    {
-        public string File { get; set; }
-        public long Size { get; set; }
     }
 }
