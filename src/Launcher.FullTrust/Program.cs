@@ -66,17 +66,17 @@ namespace Launcher.FullTrust
 
         private static void LaunchExecutable(string destinationFolder)
         {
-            var gimpFolder = Path.Combine(destinationFolder, "bin");
+            var binFolder = Path.Combine(destinationFolder, "bin");
 
             var gimp = Directory
-                .GetFiles(gimpFolder, "gimp-*.*.exe")
+                .GetFiles(binFolder, "gimp-*.*.exe")
                 .OrderBy(x => x.Length)
                 .FirstOrDefault();
 
             if (gimp == null)
                 return;
 
-            Process.Start(new ProcessStartInfo(gimp) { WorkingDirectory = gimpFolder });
+            Process.Start(new ProcessStartInfo(gimp) { WorkingDirectory = binFolder });
         }
 
         private static void KillParentUWA(string appFolder)

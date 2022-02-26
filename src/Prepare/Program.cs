@@ -1,13 +1,13 @@
 ﻿using DownloadInstaller;
 
-var setupInfo = await GimpWebSiteUtil.GetDownloadLink();
+var setupInfo = GimpWebSiteUtil.GetWindowsSetupDownloadLinkInfo();
 
-var dirs = TempDir.GetDirs();
+var dirs = ApplicationFoldersProvider.Provide();
 
 var setupExecutable = await GimpWebSiteUtil.Download(setupInfo.Link, dirs.DownloadSetup, setupInfo.FileName);
 InnoSetupHelper.InstallSilently(setupExecutable, dirs.InstallSetup);
 InnoSetupHelper.RemoveInstallationSpecificFiles(dirs.InstallSetup);
-GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup, setupInfo.Version);
+GimpSetupHelper.CheckExecutableCanBeFound(dirs.InstallSetup);
 GimpSetupHelper.Pack(dirs.InstallSetup, dirs.Package);
 GimpSetupHelper.CopyLauncherFullTrust(dirs.LauncherFullTrustAnyCpuDebug, dirs.Package);
 

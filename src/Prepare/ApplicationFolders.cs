@@ -1,6 +1,6 @@
 ﻿namespace DownloadInstaller
 {
-    class Dirs
+    class ApplicationFolders
     {
         public string Temp { get; set; }
         public string InstallSetup { get; set; }

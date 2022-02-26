@@ -2,18 +2,17 @@
 
 namespace DownloadInstaller
 {
-    internal static class TempDir
+    internal static class ApplicationFoldersProvider
     {
-        public static Dirs GetDirs()
+        public static ApplicationFolders Provide()
         {
-            Log.Debug("Getting temporary folder");
             var tempFolder = new DirectoryInfo(
                 Path.Combine(
                     Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                     "../../../..",
                     "temp")).FullName;
 
-            var dirs = new Dirs();
+            var dirs = new ApplicationFolders();
             dirs.Temp = tempFolder;
             dirs.DownloadSetup = Path.Combine(dirs.Temp, "download-setup");
             dirs.InstallSetup = Path.Combine(dirs.Temp, "install-setup");

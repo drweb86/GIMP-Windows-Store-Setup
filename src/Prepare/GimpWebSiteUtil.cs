@@ -1,51 +1,36 @@
 ﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DownloadInstaller
 {
-    class WebSiteLinkInfo
-    {
-        public string Link { get; set; }
-        public string Version { get; set; }
-        public string FileName { get; set; }
-    }
-
     internal static class GimpWebSiteUtil
     {
-        public static async Task<WebSiteLinkInfo> GetDownloadLink()
+        public static DownloadLinkInfo GetWindowsSetupDownloadLinkInfo()
         {
-            Log.Debug("Getting URL of latest Windows GIMP Setup");
-
-            var url = "https://www.gimp.org/downloads/";
+            var downloadPage = "https://www.gimp.org/downloads/";
             var linkXPath = "//a[@id='win-download-link']";
-            var web = new HtmlWeb();
-            var doc = web.Load(url);
-            var installerDownloadLink = doc.DocumentNode.SelectSingleNode(linkXPath);
 
-            if (installerDownloadLink == null)
+            var webPage = new HtmlWeb();
+            var htmlDocument = webPage.Load(downloadPage);
+            var linkNode = htmlDocument.DocumentNode.SelectSingleNode(linkXPath);
+
+            if (linkNode == null)
             {
-                Log.Error($"Cannot find link at {url} using XPath {linkXPath}.");
-                return null;
+                throw new Exception($"Cannot find link at {downloadPage} using XPath {linkXPath}.");
             }
 
-            string href = installerDownloadLink.GetAttributeValue("href", "");
-            if (href.StartsWith("//"))
-                href = "https:" + href;
+            string link = linkNode.GetAttributeValue("href", "");
+            if (link.StartsWith("//"))
+                link = "https:" + link;
 
-            Log.Info($"URL: {href}");
+            Console.WriteLine($"URL: {link}");
 
-            Log.Debug($"Extracting version from the link");
-            int startPos = href.IndexOf('-') + 1;
-            int endPos = href.LastIndexOf('-');
-            string version = href.Substring(startPos, endPos - startPos);
-            string filename = href.Substring(href.LastIndexOf('/') + 1);
+            int startPos = link.IndexOf('-') + 1;
+            int endPos = link.LastIndexOf('-');
+            string version = link.Substring(startPos, endPos - startPos);
+            string filename = link.Substring(link.LastIndexOf('/') + 1);
             Log.Info($"Version: {version}");
 
-            return new WebSiteLinkInfo { Link = href, Version = version, FileName = filename };
+            return new DownloadLinkInfo { Link = link, FileName = filename };
         }
 
         public static async Task<string> Download(string url, string folder, string fileName)
