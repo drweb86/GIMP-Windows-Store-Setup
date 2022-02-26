@@ -1,6 +1,6 @@
-MainPackage=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.30.0_x64.appx
-SymbolPackage=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\obj\x64\Release\Symbols\LauncherPackage_2.11.30.0_x64.appxsym
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.30.0_scale-100.appx
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.30.0_scale-125.appx
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.30.0_scale-150.appx
-ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.30.0_scale-400.appx
+MainPackage=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.31.0_x64.appx
+SymbolPackage=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\obj\x64\Release\Symbols\LauncherPackage_2.11.31.0_x64.appxsym
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.31.0_scale-100.appx
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.31.0_scale-125.appx
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.31.0_scale-150.appx
+ResourcePack=C:\Users\Administrator\source\repos\drweb86\GIMP-Windows-Store-Setup\src\LauncherPackage\bin\x64\Release\LauncherPackage_2.11.31.0_scale-400.appx

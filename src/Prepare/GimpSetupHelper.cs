@@ -32,13 +32,11 @@ namespace DownloadInstaller
 
         private static void CopyFilesRecursively(string sourcePath, string targetPath)
         {
-            //Now Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             {
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
             }
 
-            //Copy all the files & Replaces any files with the same name
             foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             {
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
@@ -54,7 +52,7 @@ namespace DownloadInstaller
 
         private static void CreateBinariesArchive(string installDir, string win32Dir)
         {
-            var archive = Path.Combine(win32Dir, $"gimp-binaries.7z");
+            var archive = Path.Combine(win32Dir, "gimp-binaries.7z");
 
             if (File.Exists(archive))
                 File.Delete(archive);
@@ -70,24 +68,37 @@ namespace DownloadInstaller
                 Console.Error.WriteLine(stdError);
                 throw new Exception($"Failed to pack {installDir} to {archive}");
             }
-            Console.WriteLine($"Packed");
+            Console.WriteLine("Packed");
         }
 
-        internal static void CreateBinariesState(string installSetup, string destinationDir)
+        internal static void CreateBinariesState(string installDir, string destinationDir)
         {
-            Console.WriteLine($"Saving state");
-            var jsonFile = Path.Combine(destinationDir, $"gimp-binaries.json");
+            Console.WriteLine("Saving state");
 
-            var data = new List<ItemInfo>();
-            var files = Directory.GetFiles(installSetup, "*.*", SearchOption.AllDirectories);
+            var stateFile = Path.Combine(destinationDir, "gimp-binaries.json");
+
+            var itemInfos = new List<ItemInfo>();
+            var files = Directory.GetFiles(installDir, "*.*", SearchOption.AllDirectories);
+
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
-                data.Add(new ItemInfo() { File = fileInfo.FullName.Substring(installSetup.Length + 1), Size = fileInfo.Length });
+                itemInfos.Add(
+                    new ItemInfo 
+                    {
+                        File = fileInfo.FullName.Substring(installDir.Length + 1),
+                        Size = fileInfo.Length 
+                    }
+                );
             }
-            string json = JsonSerializer.Serialize(data);
-            File.WriteAllText(jsonFile, json);
-            Console.WriteLine($"State saved");
+
+            var stateFileContent = JsonSerializer.Serialize(itemInfos);
+
+            if (File.Exists(stateFile))
+                File.Delete(stateFile);
+            File.WriteAllText(stateFile, stateFileContent);
+
+            Console.WriteLine("State was saved");
         }
     }
 }
