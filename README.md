@@ -57,4 +57,27 @@ Sometimes changes in launcher or its wrapper are huge and there's a need to chec
 7. In Select and Configure Packages check that [x] Automatically Increment, [x] x86, [x] x64, [x] Generate artifacts to validate the app with the Windows App Certification Kit and click Next. [x] Automatically Increment will help package version to be unique. Release build mode in Solution Explorer is important for WACK. ![](img/select-and-configure-packages.png)
 8. Navigate to folder src\LauncherPackage\AppPackages\LauncherPackage_XXX_Test and install LauncherPackage_XXXXX_x86_x64.appxbundle by double click on it.
 9. Run App from Start menu to test.
-10. Revert changes in manifest and project to cleanup reference to certificate.
+10. Revert changes in manifest and project to cleanup references to certificate.
+
+# Package Infrastructure
+
+Package consists of an app, full trust executable, GIMP binaries and manifest.
+
+![](img/package-structure.png)
+
+Launcher (**Launcher** project) is an UWP application the shortcut to which user is seeing. It is very limited in rights.
+
+Full trust executable (**Launcher.FullTrust** project) is a separate .Net-Core 6 WinForms application for preparing GIMP to launch.
+
+Gimp binaries is an archive with GIMP binaries created by Prepare project.
+
+Manifest is a declaration of package and its content, including special permissions for Launcher.FullTrustfull. GIMP was not declared as full trust executable because it launches other executables for plugins etc. Any other executable except declared single one is automatically limited in interactions with other processes, virtualized, cannot load libraries, etc.
+
+The process of launching the GIMP looks like this
+
+1. Platform runs Launcher
+2. Launcher asks Platform to start Launcher.FullTrust (declared as full trust executable)
+3. Platform launches Launcher.FullTrust
+4. Launcher.FullTrust checks if all GIMP files are unmodified by size and exist in folder %TEMP%\gimp-binaries. If files are not matching the state or missing, then Launcher.FullTrust deletes folder and unpacks Gimp binaries to it.
+5. Launcher.FullTrust kills Launcher
+6. Launcher.FullTrust starts gimp.
